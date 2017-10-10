@@ -21,11 +21,40 @@ fn main() {
     // using tipos multaveis
     let mut vector:Vec<u8> = vec![1,2,3];
     vector.push(4);
-    println!("Tipo multavel {:?}", vector)    
+    println!("Tipo multavel vector {:?}", vector);    
+
+    {
+    // let doidao = &mut vector; //pegar emprestado borrow ref vector
+    let mut doidao = vector.clone(); //clonar var
+    doidao.clear();
+    println!("Tipo multavel doidao {:?}", doidao);       
+    }
+
+    println!("Tipo multavel vector {:?}", vector);
+
+    // usar enum
+    let comida_boa = Treta::Bolacha;
+    let comida_ruim = Treta::Biscoito;
+    
+    println!("Falou Bolacha? {}", causar_treta(comida_boa));
+    println!("Falou Biscoito? {}", causar_treta(comida_ruim));    
+
+}
+// enum
+enum Treta {
+    Bolacha,
+    Biscoito
+}    
+
+fn causar_treta(t:Treta)->String {
+    match t {
+        Treta::Bolacha => {String::from("Correto")},
+        Treta::Biscoito => {String::from("Errado")}
+    }
 }
 
 fn print(s:&String) {
-    println!("Func Print {}", s)
+    println!("Func Print {:?}", s)
 }
 
 fn add_num(x:u8, y:u8)->u8{
